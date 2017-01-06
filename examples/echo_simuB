@@ -1,0 +1,52 @@
+BIN=src/smod1303
+
+PARAM=stdin
+
+#export OMP_NUM_THREADS=10
+
+
+#
+# ------------------------------------------------------------
+#
+
+cat << PARAMEND1 > $PARAM
+/*--+----1----+----2----+----3----+----4----+----5----+----6----+----7----+--*/
+ INPUT FILES: ephemeris file, EOP file and Earth gravity coefficient       
+/*--+----1----+----2----+----3----+----4----+----5----+----6----+----7----+--*/
+ephfile                       inputs/lnxp1900p2053.421
+#ephfile                       inputs/lnxp1600p2200.405
+#ephfile                       inputs/lnx1900.405
+eopfile                       inputs/eopc04_IAU2000.62-now
+grvfile                       inputs/EGM2008.grv
+oceanfile                     inputs/fes2004_Cnm-Snm.dat
+/*--+----1----+----2----+----3----+----4----+----5----+----6----+----7----+--*/
+ Arc Set Option Cards - Orbit Integration       
+/*--+----1----+----2----+----3----+----4----+----5----+----6----+----7----+--*/
+epoch     2006 5 1
+utcsec    -14       86400
+kepler    0
+#element1  6851260.4653640827    0.001849     89.040655
+#element2  171.509233     24.410241    350.107984 
+#element1      -3351595.59409309 1609193.04166016 -5756130.43526213
+#element2     -5873.396478066620 2560.067913415369 4123.369536030681
+element1      -3538828.68186609 1690379.76487602 -5618844.39862710
+element2     -5737.081523007786 2494.267317714532 4350.553926356394
+intstep   5
+/*--+----1----+----2----+----3----+----4----+----5----+----6----+----7----+--*/
+ Global Set Option Cards - Force Model      
+/*--+----1----+----2----+----3----+----4----+----5----+----6----+----7----+--*/
+gravity   0 0
+permtide  0
+bodytide  0
+oceantide 0
+nbody     0
+amratio   0
+reltiv    0
+PARAMEND1
+
+time $BIN $PARAM
+rm $PARAM
+
+cp fort.dat GPS_2006-05-RL02_B.asc
+
+

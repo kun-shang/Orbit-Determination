@@ -1,0 +1,85 @@
+BIN=src/smod.odp
+
+PARAM=stdin
+
+#export OMP_NUM_THREADS=10
+
+
+
+cat << PARAMEND1 > $PARAM
+/*--+----1----+----2----+----3----+----4----+----5----+----6----+----7----+--*/
+  Everybody Can Have Orbit: Global Set Option Cards                                                            
+/*--+----1----+----2----+----3----+----4----+----5----+----6----+----7----+--*/
+planet    mercury   1    1    2.203208082807623e+13
+planet    venus     2    1    3.248586038641429e+14
+planet    earth     3    1    398600.44180E+09
+planet    mars      4    1    4.28283719012840e+13
+planet    jupiter   5    1    1.267127698227696e+17
+planet    saturn    6    1    3.794062664949063e+16
+planet    uranus    7    1    5.794549096929744e+15
+planet    neptune   8    1    6.836534169987595e+15
+planet    pluto     9    1    9.816009029289940e+11
+planet    moon      10   1    4.902801056E+12
+planet    sun       11   1    1.32712442076e20
+elcutoff  0
+station   shao      1    -2831686.9130      4675733.6660      3275327.6900
+station   beij      2     -2201304.5880      4324789.2160      4125367.9130
+station   kunm      3     -1281152.4980      5640863.9690      2682653.3490
+station   urmq      4     228310.7200      4631922.7950      4367063.9880
+station   nno       9    -2414066.824       4907869.366     -3270605.5350
+/*--+----1----+----2----+----3----+----4----+----5----+----6----+----7----+--*/
+  Everybody Can Have Orbit: Arc Set Option Cards - Orbit&Observable Simulation                                                           
+/*--+----1----+----2----+----3----+----4----+----5----+----6----+----7----+--*/
+indicator 2  //1: orbit; 2: simulation; 3: orbit determination
+center    3
+epoch     2006 5 1
+utcsec    0        86400
+kepler    0
+#element1  6851260.4653640827    0.001849     89.040655
+#element2  171.509233     24.410241    350.107984 
+element1      -3351595.59409309 1609193.04166016 -5756130.43526213
+element2     -5873.396478066620 2560.067913415369 4123.369536030681
+intstep   60
+orbfile   0        86400    60 
+#f2istep   60
+#stafile   1    1227.18299995        43200  10.0  
+simulate  22  0.01  0        86400   60.0  3 9  10.0
+#simulate  99  0.01  68400        864000   60.0   0  0  0
+#relativ   0
+#leapsec   32
+/*--+----1----+----2----+----3----+----4----+----5----+----6----+----7----+--*/
+ Global Set Option Cards - Force Model      
+/*--+----1----+----2----+----3----+----4----+----5----+----6----+----7----+--*/
+gravity   100 100
+permtide  1
+bodytide  1
+oceantide 0
+nbody     1
+amratio   0
+reltiv    0
+----+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----
+  Everybody Can Have Orbit: Arc Set Option Cards - Orbit Determination          
+----+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----
+rmsconv   0.01
+itermax   1
+varcovp   1e14  1e14  1e14
+varcovv   1e14  1e14  1e14
+solrad    0.026    0    1e14
+solraddot 0.0    0    1e14
+bias      0.0    0    1e14
+biasdot   0.0    0    1e14
+//select    22   0.0     190000.0  2 3  0.01
+----+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----
+  TOTAL COUNT PHASE                                                            
+----+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----
+ephfile                       inputs/lnxp1900p2053.421
+eopfile                       inputs/eopc04_IAU2000_62-now
+obsfile                       simulate.dat
+grvfile                       inputs/LP165P.grv
+oceanfile                     inputs/fes2004_Cnm-Snm.dat
+PARAMEND1
+
+time $BIN $PARAM
+#rm $PARAM
+
+

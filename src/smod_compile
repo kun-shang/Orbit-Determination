@@ -1,0 +1,17 @@
+OPT=-O1
+LD=-m128bit-long-double
+DIR=Cdist
+
+NOVASC="$DIR/novas.c $DIR/novascon.c $DIR/nutation.c $DIR/eph_manager.c $DIR/solsys1.c $DIR/readeph0.c"
+NOVASH="$DIR/novas.h $DIR/novascon.h $DIR/nutation.h $DIR/eph_manager.h $DIR/solarsystem.h"
+#echo $NOVASC
+#echo $NOVASH
+
+gcc $OPT $LD -o smod.odp main.c smod.c smod.h $NOVASC $NOVASH -lm -I$DIR -I/0/home/shang.34/cspice/include /0/home/shang.34/cspice/lib/cspice.a
+
+
+gcc -O0 $LD -g -o smod.debug main.c smod.c smod.h  $NOVASC $NOVASH -lm -I$DIR -I/0/home/shang.34/cspice/include /0/home/shang.34/cspice/lib/cspice.a
+
+
+
+
